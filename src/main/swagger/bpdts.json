@@ -1,0 +1,138 @@
+{
+  "_comment_" : [ 
+  	 "========================================================================",
+  	 "BPDTS",
+  	 "========================================================================",
+	 "",
+	 "This file is part of BPDTS.",
+	 "",
+	 "BPDTS is free software: you can redistribute it and/or modify it under",
+	 "the terms of the GNU General Public License as published by the Free",
+	 "Software Foundation, either version 3 of the License, or (at your option)",
+	 "any later version.",
+	 "",
+	 "BPDTS is distributed in the hope that it will be useful, but WITHOUT ANY",
+	 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS",
+	 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more",
+	 "details.",
+	 "",
+	 "You should have received a copy of the GNU General Public License along",
+	 "with BPDTS. If not, see <http://www.gnu.org/licenses/>.",
+	 "(C) Copyright 2021, Gabor Kecskemeti (kecskemeti@iit.uni-miskolc.hu)" ],
+  "swagger" : "2.0",
+  "basePath" : "/",
+  "paths" : {
+    "/city/{city}/users" : {
+      "parameters" : [ {
+        "name" : "city",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ],
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/UserList"
+            }
+          }
+        },
+        "operationId" : "get_city_users",
+        "tags" : [ "default" ]
+      }
+    },
+    "/user/{id}" : {
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ],
+      "get" : {
+        "responses" : {
+          "404" : {
+            "description" : "Not Found"
+          },
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/User"
+            }
+          }
+        },
+        "operationId" : "get_user",
+        "tags" : [ "default" ]
+      }
+    },
+    "/users" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/UserList"
+            }
+          }
+        },
+        "operationId" : "get_users",
+        "tags" : [ "default" ]
+      }
+    }
+  },
+  "info" : {
+    "title" : "API",
+    "version" : "1.0"
+  },
+  "definitions" : {
+    "User" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer"
+        },
+        "first_name" : {
+          "type" : "string"
+        },
+        "last_name" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "ip_address" : {
+          "type" : "string"
+        },
+        "latitude" : {
+          "type" : "number"
+        },
+        "longitude" : {
+          "type" : "number"
+        },
+        "city" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UserList" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/User"
+      }
+    }
+  },
+  "produces" : [ "application/json" ],
+  "consumes" : [ "application/json" ],
+  "tags" : [ {
+    "name" : "default",
+    "description" : "Default namespace"
+  } ],
+  "responses" : {
+    "ParseError" : {
+      "description" : "When a mask can't be parsed"
+    },
+    "MaskError" : {
+      "description" : "When any error occurs on mask"
+    }
+  }
+}
